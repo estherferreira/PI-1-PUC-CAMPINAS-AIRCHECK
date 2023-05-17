@@ -1,0 +1,48 @@
+/* Mobile-first styles */
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 1.37500rem;
+  }
+
+  .content {
+    display: flex;
+
+    width: 100%;
+    padding: 0 2.5rem;
+    justify-content: space-between;
+  }
+
+  .css-1upb9tn {
+    border: 1px solid !important;
+  }
+
+  .ItemActive {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: #71D8AD;
+    color: #002062;
+
+    border-radius: 0.434375rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1400px and up)*/
+@media (min-width: 1400px) {
+}
