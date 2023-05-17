@@ -6,8 +6,8 @@ import { FloatingLabel } from "../FloatingLabel";
 
 export function IncludeOption() {
   return (
-    <div className="flex bg-[#2268F3] p-[3rem] rounded-[0.434375rem] justify-between">
-      <div className="flex flex-col gap-[2.75rem]">
+    <div className={style.container}>
+      <div className={style.leftSide}>
         <TitleAndDescription
           title="Como está o ar hoje?"
           text="Me ajude com algumas informações!"
@@ -15,7 +15,7 @@ export function IncludeOption() {
         <Button text="Enviar dados"></Button>
       </div>
 
-          <div className="flex gap-[1rem] items-center">
+          <div className={style.rightSide}>
             <div className="flex flex-col gap-[1rem]">
               <FloatingLabel text="MP10"></FloatingLabel>
               <FloatingLabel text="MP2.5"></FloatingLabel>
