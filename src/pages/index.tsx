@@ -8,6 +8,8 @@ import Logout from "../../public/logout.svg";
 
 import { IconWithText } from "@/components/IconWithText";
 import { IncludeOption } from "@/components/IncludeOption";
+import { TabsTable } from "@/components/TabsTable";
+import { HalfDonutChart } from "@/components/HalfDonut";
 
 export default function Home() {
   return (
@@ -23,8 +25,11 @@ export default function Home() {
       <div className={style.content}>
         <div className={style.leftSide}>
           <IncludeOption></IncludeOption>
+          <TabsTable></TabsTable>
         </div>
-        <div className={style.rightSide}></div>
+        <div className={style.rightSide}>
+          <HalfDonutChart value={30}></HalfDonutChart>
+        </div>
       </div>
     </main>
   );
