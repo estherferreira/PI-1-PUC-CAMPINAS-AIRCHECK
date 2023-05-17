@@ -26,6 +26,20 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-span, p, h1, h2, h3, h4, h5 {
+span, p, h1, h2, h3, h4, h5, li, ul {
   font-family: 'Poppins', sans-serif;
+}
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1400px and up) */
+@media (min-width: 1400px) {
 }
