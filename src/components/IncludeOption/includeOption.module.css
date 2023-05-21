@@ -33,7 +33,7 @@
     .container {
         display: flex;
         background-color: #2268F3;
-        padding: 3rem;
+        padding: 4rem 3rem;
         border-radius: 0.434375rem;
         justify-content: space-between;
     }
@@ -41,7 +41,7 @@
     .leftSide {
         display: flex;
         flex-direction: column;
-        gap: 2.75rem;
+        gap: 5rem;
     }
     
     .rightSide {
