@@ -8,12 +8,12 @@ import Logout from "../../public/logout.svg";
 
 import { IconWithText } from "@/components/IconWithText";
 import { IncludeOption } from "@/components/IncludeOption";
-import { TabsTable } from "@/components/TabsTable";
-import { HalfDonutChart } from "@/components/HalfDonut";
+import { Board } from "@/components/Board";
 
 export default function Home() {
+
   return (
-    <main className="flex flex-col bg-[#002062] h-[100vh] py-[4.8125rem] px-[9.25rem] gap-[4rem]">
+    <main className={style.main}>
       <div className="flex justify-between">
         <Image src={Logo} alt="Logo"></Image>
         <div className="flex gap-[4.1875rem]">
@@ -22,15 +22,9 @@ export default function Home() {
           <IconWithText src={Logout} alt="Logout" text="Sair"></IconWithText>
         </div>
       </div>
-      <div className={style.content}>
-        <div className={style.leftSide}>
-          <IncludeOption></IncludeOption>
-          <TabsTable></TabsTable>
-        </div>
-        <div className={style.rightSide}>
-          <HalfDonutChart value={30}></HalfDonutChart>
-        </div>
-      </div>
+      <IncludeOption></IncludeOption>
+      <Board name="Muito Ruim"></Board>
+      <small>&copy; 2023 Aircheck</small>
     </main>
   );
 }
