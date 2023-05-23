@@ -17,9 +17,9 @@ export default function Home() {
       <div className="flex justify-between">
         <Image src={Logo} alt="Logo"></Image>
         <div className="flex gap-[4.1875rem]">
-          <IconWithText src={Pen} alt="Pen" text="Alterar"></IconWithText>
-          <IconWithText src={Delete} alt="Delete" text="Excluir"></IconWithText>
-          <IconWithText src={Logout} alt="Logout" text="Sair"></IconWithText>
+          <IconWithText href="/" src={Pen} alt="Pen" text="Alterar"></IconWithText>
+          <IconWithText href="/" src={Delete} alt="Delete" text="Excluir"></IconWithText>
+          <IconWithText href="/sair" src={Logout} alt="Logout" text="Sair"></IconWithText>
         </div>
       </div>
       <IncludeOption></IncludeOption>
