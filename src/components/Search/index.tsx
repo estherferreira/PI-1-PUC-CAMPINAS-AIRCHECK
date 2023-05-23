@@ -22,7 +22,7 @@ export function Search({ onSearch }: SearchProps) {
         <Image className={style.invert} src={SearchIcon} alt=""></Image>
         <input
           type="text"
-          className="font-normal font-['Inter'] text-sm bg-inherit w-full outline-none placeholder:text-[#ffffff50]"
+          className="font-normal font-['Inter'] text-sm bg-inherit w-full outline-none placeholder:text-[#ffffff50] text-[#fff]"
           placeholder="Pesquisar"
           value={text}
           onChange={handleInputChange}
