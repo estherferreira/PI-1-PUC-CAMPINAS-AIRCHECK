@@ -1,0 +1,113 @@
+/* Mobile-first styles */
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Extra large devices (large desktops, 1400px and up)*/
+@media (min-width: 1400px) {
+  .content {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    width: 75%;
+  }
+
+  .rightSide {
+    display: flex;
+    flex-direction: column;
+
+    padding: 3rem 0;
+    align-items: center;
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: #ffffff05;
+    border-radius: 0.434375rem;
+  }
+
+  .search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tabsTable {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 1.375rem;
+  }
+
+  .itemTab {
+    display: flex;
+
+    width: 100%;
+    padding: 0 2.5rem;
+
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .css-1upb9tn {
+    border: 1px solid !important;
+    color: #fff !important;
+  }
+
+  .halfDonutChart {
+    display: flex;
+    flex-direction: column;
+  
+    align-items: center;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+
+    padding: 0.3rem 2rem;
+
+    font-weight: 500;
+    border-radius: 0.434375rem;
+  }
+
+  .ItemActive {
+    display: flex;
+    align-items: center;
+
+    padding: 0.3rem 2rem;
+
+    background-color: #71d8ad;
+    color: #002062;
+    font-weight: 500;
+    border-radius: 0.434375rem;
+  }
+
+  .effects {
+    font-weight: 300;
+    font-size: 0.89rem;
+    color: #fffffff5;
+  }
+}
+
+/* Extra large devices (large desktops, 1400px and up)*/
+@media (min-width: 1500px) {
+}

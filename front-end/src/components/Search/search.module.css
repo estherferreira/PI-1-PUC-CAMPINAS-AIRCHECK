@@ -1,0 +1,12 @@
+.input {
+    outline: none!important;
+}
+
+.xCircle {
+    cursor: pointer;
+    filter: invert(1);
+}
+
+.invert {
+    filter: invert(1);
+}

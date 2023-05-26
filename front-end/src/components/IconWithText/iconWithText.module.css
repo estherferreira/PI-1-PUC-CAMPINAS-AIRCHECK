@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    gap: 0.6875rem;
+    align-items: center;
+}
+
+.span {
+    color: white;
+    font-weight: 500;
+}
