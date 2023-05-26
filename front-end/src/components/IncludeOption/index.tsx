@@ -7,6 +7,7 @@ import { FloatingLabel } from "../FloatingLabel";
 
 export function IncludeOption() {
   const url = "http://127.0.0.1:3000";
+  const [requestStatus, setRequestStatus] = useState("");
   const [formValues, setFormValues] = useState({
     mp10: "",
     mp25: "",
@@ -31,14 +32,14 @@ export function IncludeOption() {
     })
       .then((response) => {
         if (response.ok) {
-
-          console.log("Solicitação POST bem-sucedida");
+          setRequestStatus("success");
         } else {
-          console.log("Erro na solicitação POST");
+          setRequestStatus("error");
         }
       })
       .catch((error) => {
-        console.log("Erro na solicitação POST", error);
+        console.log("Erro na solicitação", error);
+        setRequestStatus("error");
       });
   };
 
@@ -49,7 +50,11 @@ export function IncludeOption() {
           title="Como está o ar hoje?"
           text="Preencha os valores para cada parâmetro e verifique como está o ar"
         ></TitleAndDescription>
-        <Button text="Enviar dados" onClick={handleSubmit}></Button>
+        <div className="flex flex-col gap-[1rem]">
+          <Button text="Enviar dados" onClick={handleSubmit}></Button>
+          {requestStatus === "success" && <p className="text-[13px]">Amostra enviada!</p>}
+          {requestStatus === "error" && <p className="text-[13px]">Erro ao enviar a amostra!</p>}
+        </div>
       </div>
 
       <div className={style.rightSide}>
