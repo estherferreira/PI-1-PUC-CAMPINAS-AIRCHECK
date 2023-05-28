@@ -20,7 +20,6 @@ export function Board({ name, effect }: BoardProps) {
   let value = 0;
 
   useEffect(() => {
-    let effect = "";
 
     if (name === "Bom") {
       value = 1;
