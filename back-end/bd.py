@@ -14,15 +14,14 @@ connection = oracledb.connect(
 
 print("Successfully connected to Oracle Database")
 
-os.system('pause')
-os.system('cls')
-
 cursor = connection.cursor()
 
+
 @app.route("/", methods=["GET", "POST"])
-def handle_request():
+def add_simple():
     if request.method == "GET":
-        return "Success"
+        resultado = print_avarage()
+        return f"{resultado}"
 
     if request.method == "POST":
         data = request.get_json()
@@ -40,5 +39,21 @@ def handle_request():
 
         return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
-if __name__ == "__main__":  
-    app.run(port=3000)
+def print_avarage():
+   cursor.execute(
+       "SELECT AVG(MP10), AVG(MP25), AVG(O3), AVG(CO), AVG(NO2), AVG(SO2) FROM Amostras")
+   retorno = cursor.fetchone()
+   
+   print(f'Media de MP10: {retorno[0]:.2f}')
+   print(f'Media de MP25: {retorno[1]:.2f}')
+   print(f'Media de O3: {retorno[2]:.2f}')
+   print(f'Media de CO: {retorno[3]:.2f}')
+   print(f'Media de NO2: {retorno[4]:.2f}')
+   print(f'Media de SO2: {retorno[5]:.2f}')
+
+   resultado = mainClass(retorno[0], retorno[1], retorno[2], retorno[3], retorno[4], retorno[5])
+   
+   return resultado
+
+if __name__ == "__main__":
+    app.run(port = 3000)

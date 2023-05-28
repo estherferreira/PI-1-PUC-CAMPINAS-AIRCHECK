@@ -8,7 +8,7 @@ def indice_qualidade_ar(valor, limites):
     return -1
 
 # Função para imprimir os efeitos na saúde relacionados à classificação de qualidade do ar.
-def imprime_efeitos_saude(classificação):
+def imprime_efeitos_saude(classificacao):
     # Dicionário de efeitos na saúde relacionados à classificação.
     efeitos = {
         # ... (efeitos na saúde existentes)
@@ -20,10 +20,11 @@ def imprime_efeitos_saude(classificação):
     }
 
     # Imprime o efeito na saúde relacionado à classificação fornecida.
-    print(efeitos[classificação])
+    print(efeitos[classificacao])
+    return efeitos[classificacao]
 
 # Função principal.
-def mainClass(MP10, MP25, O3, CO, NO2, SO2):
+def mainClass(mp10, mp25, o3, co, no2, so2):
     # Limites para os índices de qualidade do ar para cada poluente.
     limites_MP10 = [(0, 50), (50, 100), (100, 150), (150, 250), (250, float('inf'))]
     limites_MP25 = [(0, 25), (25, 50), (50, 75), (75, 125), (125, float('inf'))]
@@ -34,12 +35,12 @@ def mainClass(MP10, MP25, O3, CO, NO2, SO2):
 
     # Calcula o índice de qualidade do ar para cada poluente.
     indices = [
-        indice_qualidade_ar(MP10, limites_MP10),
-        indice_qualidade_ar(MP25, limites_MP25),
-        indice_qualidade_ar(O3, limites_O3),
-        indice_qualidade_ar(CO, limites_CO),
-        indice_qualidade_ar(NO2, limites_NO2),
-        indice_qualidade_ar(SO2, limites_SO2),
+        indice_qualidade_ar(mp10, limites_MP10),
+        indice_qualidade_ar(mp25, limites_MP25),
+        indice_qualidade_ar(o3, limites_O3),
+        indice_qualidade_ar(co, limites_CO),
+        indice_qualidade_ar(no2, limites_NO2),
+        indice_qualidade_ar(so2, limites_SO2),
     ]
 
     # Determina a classificação geral de qualidade do ar com base nos índices calculados.
@@ -48,9 +49,13 @@ def mainClass(MP10, MP25, O3, CO, NO2, SO2):
 
     # Imprime a classificação geral de qualidade do ar.
     print(f"A qualidade do ar é classificada como: {qualificacoes[qualidade_ar - 1]}")
-    
+    qualificacao = str(qualificacoes[qualidade_ar - 1])
+
     # Imprime os efeitos na saúde relacionados à classificação de qualidade do ar.
-    imprime_efeitos_saude(qualidade_ar)
+    efeitos_saude = imprime_efeitos_saude(qualidade_ar)
+
+    # Retorna a qualificação e os efeitos na saúde.
+    return qualificacao, efeitos_saude
 
 # Chama a função principal.
 """ mainClass() """
