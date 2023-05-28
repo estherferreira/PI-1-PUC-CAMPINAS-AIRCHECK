@@ -23,13 +23,26 @@ cursor = connection.cursor()
 
 
 @app.route("/", methods=["GET", "POST"])
-def add_simple():
+def simple():
     if request.method == "GET":
+        cursor.execute(
+            "SELECT AVG(MP10), AVG(MP25), AVG(O3), AVG(CO), AVG(NO2), AVG(SO2) FROM Amostras")
 
-        # Chama a função print_avarage() para obter o valor de "resultado"
-        resultado = print_avarage()
-        # Retorna o resultado como uma string.
-        return f"{resultado}"
+        # Retorna a primeira linha de resultado da consulta como uma tupla
+        retorno = cursor.fetchone()
+
+        print(f'Media de MP10: {retorno[0]:.2f}')
+        print(f'Media de MP25: {retorno[1]:.2f}')
+        print(f'Media de O3: {retorno[2]:.2f}')
+        print(f'Media de CO: {retorno[3]:.2f}')
+        print(f'Media de NO2: {retorno[4]:.2f}')
+        print(f'Media de SO2: {retorno[5]:.2f}')
+
+        # "Resultado" recebe retorno da função mainClass
+        qualificacao, efeitos_saude = mainClass(retorno[0], retorno[1], retorno[2],
+                                                retorno[3], retorno[4], retorno[5])
+
+        return {'classification': [f'{qualificacao}', f'{efeitos_saude}']}
 
     if request.method == "POST":
         data = request.get_json()
@@ -45,28 +58,7 @@ def add_simple():
         cursor.execute(comando)
         connection.commit()
 
-
-def print_avarage():
-    # Executa uma consulta para calcular as médias dos valores
-    cursor.execute(
-        "SELECT AVG(MP10), AVG(MP25), AVG(O3), AVG(CO), AVG(NO2), AVG(SO2) FROM Amostras")
-
-    # Retorna a primeira linha de resultado da consulta como uma tupla
-    retorno = cursor.fetchone()
-
-    print(f'Media de MP10: {retorno[0]:.2f}')
-    print(f'Media de MP25: {retorno[1]:.2f}')
-    print(f'Media de O3: {retorno[2]:.2f}')
-    print(f'Media de CO: {retorno[3]:.2f}')
-    print(f'Media de NO2: {retorno[4]:.2f}')
-    print(f'Media de SO2: {retorno[5]:.2f}')
-
-    # "Resultado" recebe retorno da função mainClass
-    resultado = mainClass(retorno[0], retorno[1],
-                          retorno[2], retorno[3], retorno[4], retorno[5])
-
-    return resultado
-
+        return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
 if __name__ == "__main__":
     app.run(port=3000)

@@ -11,40 +11,28 @@ type EChartsOption = echarts.EChartsOption;
 
 interface BoardProps {
   name: string;
+  effect: string;
 }
 
-export function Board({ name }: BoardProps) {
+export function Board({ name, effect }: BoardProps) {
   const chartRef = useRef<HTMLDivElement>(null);
-  const [effects, setEffect] = useState<String>("");
 
   let value = 0;
 
   useEffect(() => {
     let effect = "";
 
-    if (name === "Boa") {
+    if (name === "Bom") {
       value = 1;
-      effect =
-        "A qualidade do ar é considerada satisfatória e a poluição do ar apresenta pouco ou nenhum risco";
-    } else if (name === "Moderada") {
+    } else if (name === "Moderado") {
       value = 0.75;
-      effect =
-        "Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar sintomas como tosse seca e cansaço. A população, em geral, não é afetada";
     } else if (name === "Ruim") {
       value = 0.5;
-      effect =
-        "Toda a população pode apresentar sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta. Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar efeitos mais sérios na saúde";
     } else if (name === "Muito Ruim") {
       value = 0.25;
-      effect =
-        "Toda a população pode apresentar agravamento dos sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta e ainda falta de ar e respiração ofegante. Efeitos ainda mais graves à saúde de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas)";
     } else {
       value = 0;
-      effect =
-        "Toda a população pode apresentar sérios riscos de manifestações de doenças respiratórias e cardiovasculares. Aumento de mortes prematuras em pessoas de grupos sensíveis";
     }
-
-    setEffect(effect);
 
     if (typeof window !== "undefined" && chartRef.current) {
       const myChart = echarts.init(chartRef.current);
@@ -134,11 +122,11 @@ export function Board({ name }: BoardProps) {
         <div className={style.tabsTable}>
           <header className={style.header}>
             <div className={style.itemTab}>
-              <span className={name === "Boa" ? style.ItemActive : style.item}>
-                Boa
+              <span className={name === "Bom" ? style.ItemActive : style.item}>
+                Bom
               </span>
-              <span className={name === "Moderada" ? style.ItemActive : ""}>
-                Moderada
+              <span className={name === "Moderado" ? style.ItemActive : ""}>
+                Moderado
               </span>
               <span className={name === "Ruim" ? style.ItemActive : ""}>
                 Ruim
@@ -146,8 +134,8 @@ export function Board({ name }: BoardProps) {
               <span className={name === "Muito Ruim" ? style.ItemActive : ""}>
                 Muito Ruim
               </span>
-              <span className={name === "Péssima" ? style.ItemActive : ""}>
-                Péssima
+              <span className={name === "Péssimo" ? style.ItemActive : ""}>
+                Péssimo
               </span>
             </div>
             <Divider
@@ -157,7 +145,7 @@ export function Board({ name }: BoardProps) {
           </header>
 
           <div>
-            <p className={style.effects}>{effects}</p>
+            <p className={style.effects}>{effect}</p>
           </div>
         </div>
         <Maps></Maps>

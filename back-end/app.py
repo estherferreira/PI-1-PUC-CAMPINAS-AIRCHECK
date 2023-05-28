@@ -12,11 +12,11 @@ def imprime_efeitos_saude(classificacao):
     # Dicionário de efeitos na saúde relacionados à classificação.
     efeitos = {
         # ... (efeitos na saúde existentes)
-        1: "N1 - Boa: A qualidade do ar é considerada satisfatória e a poluição do ar apresenta pouco ou nenhum risco.",
-        2: "N2 - Moderada: Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar sintomas como tosse seca e cansaço. A população, em geral, não é afetada.",
-        3: "N3 - Ruim: Toda a população pode apresentar sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta. Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar efeitos mais sérios na saúde.",
-        4: "N4 - Muito Ruim: Toda a população pode apresentar agravamento dos sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta e ainda falta de ar e respiração ofegante. Efeitos ainda mais graves à saúde de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas).",
-        5: "N5 - Péssima: Toda a população pode apresentar sérios riscos de manifestações de doenças respiratórias e cardiovasculares. Aumento de mortes prematuras em pessoas de grupos sensíveis."
+        1: "A qualidade do ar é considerada satisfatória e a poluição do ar apresenta pouco ou nenhum risco.",
+        2: "Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar sintomas como tosse seca e cansaço. A população, em geral, não é afetada.",
+        3: "Toda a população pode apresentar sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta. Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar efeitos mais sérios na saúde.",
+        4: "Toda a população pode apresentar agravamento dos sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta e ainda falta de ar e respiração ofegante. Efeitos ainda mais graves à saúde de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas).",
+        5: "Toda a população pode apresentar sérios riscos de manifestações de doenças respiratórias e cardiovasculares. Aumento de mortes prematuras em pessoas de grupos sensíveis."
     }
 
     # Imprime o efeito na saúde relacionado à classificação fornecida.
@@ -45,7 +45,7 @@ def mainClass(mp10, mp25, o3, co, no2, so2):
 
     # Determina a classificação geral de qualidade do ar com base nos índices calculados.
     qualidade_ar = max(indices)
-    qualificacoes = ["Boa", "Moderada", "Ruim", "Muito Ruim", "Péssima"]
+    qualificacoes = ["Bom", "Moderado", "Ruim", "Muito Ruim", "Péssimo"]
 
     # Imprime a classificação geral de qualidade do ar.
     print(f"A qualidade do ar é classificada como: {qualificacoes[qualidade_ar - 1]}")
