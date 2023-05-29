@@ -18,40 +18,12 @@
         padding: 4rem;
         gap: 4rem;
     }
-
-    .content {
-        display: flex;
-        gap: 4rem;
-    }
-
-    .leftSide {
-        display: flex;
-        flex-direction: column;
-        gap: 11rem;
-        width: 75%;
-    }
-
-    .rightSide {
-        display: flex;
-        width: 35%;
-    }
-
-    .search {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .tabAndMap {
-        display: flex;
-        flex-direction: column;
-        gap: 10rem;
-    }
 }
 
 /* Extra large devices (large desktops, 1400px and up)*/
 @media (min-width: 1500px) {
     .main {
-        padding: 4.8125rem 9.25rem;
+        padding: 4.8125rem 6rem;
+        height: 177vh;
     }
 }

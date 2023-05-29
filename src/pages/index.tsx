@@ -46,7 +46,7 @@ export default function Home() {
         <Image src={Logo} alt="Logo"></Image>
         <div className="flex gap-[4.1875rem]">
           <IconWithText
-            href="/"
+            href="/alterar"
             src={Pen}
             alt="Pen"
             text="Alterar"
