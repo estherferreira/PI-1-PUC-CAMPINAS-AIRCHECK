@@ -1,11 +1,12 @@
 import style from "./includeOption.module.css";
 import { ChangeEvent, useState } from "react";
+type OnDataSubmittedCallback = () => void;
 
 import { TitleAndDescription } from "../TitleAndDescription";
 import { Button } from "../Button";
 import { FloatingLabel } from "../FloatingLabel";
 
-export function IncludeOption() {
+export function IncludeOption({ onDataSubmitted }: { onDataSubmitted: OnDataSubmittedCallback }) {
   const url = "http://127.0.0.1:3000";
   const [requestStatus, setRequestStatus] = useState("");
   const [formValues, setFormValues] = useState({
@@ -32,6 +33,7 @@ export function IncludeOption() {
     })
       .then((response) => {
         if (response.ok) {
+          onDataSubmitted();
           setRequestStatus("success");
         } else {
           setRequestStatus("error");

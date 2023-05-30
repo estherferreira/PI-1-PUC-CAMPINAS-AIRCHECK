@@ -19,7 +19,7 @@ export default function Home() {
 
   const url = "http://127.0.0.1:3000";
 
-  useEffect(() => {
+  const fetchData = async () => {
     fetch(`${url}/`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -38,6 +38,10 @@ export default function Home() {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
@@ -65,7 +69,7 @@ export default function Home() {
           ></IconWithText>
         </div>
       </div>
-      <IncludeOption></IncludeOption>
+      <IncludeOption onDataSubmitted={fetchData}></IncludeOption>
       <Board name={`${classfication}`} effect={`${effects}`}></Board>
       <small>&copy; 2023 Aircheck</small>
     </main>
