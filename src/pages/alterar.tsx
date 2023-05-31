@@ -17,6 +17,7 @@ import Logo from "../../public/Logo.svg";
 import Pen from "../../public/pen.svg";
 import Delete from "../../public/delete.svg";
 import Logout from "../../public/logout.svg";
+import { EditableTable } from "@/components/EditableTable";
 
 export default function Alterar() {
   return (
@@ -46,8 +47,9 @@ export default function Alterar() {
           ></IconWithText>
         </div>
       </div>
+      <EditableTable></EditableTable>
       <div className={style.content}>
-        <TableContainer overflowX={"hidden"}>
+        {/* <TableContainer overflowX={"hidden"}>
           <Table>
             <Thead>
               <Tr>
@@ -159,7 +161,8 @@ export default function Alterar() {
               </Tr>
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
+        
       </div>
     </main>
   );
