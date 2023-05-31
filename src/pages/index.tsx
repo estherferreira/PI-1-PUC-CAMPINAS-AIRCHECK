@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import style from "../styles/painel.module.css";
 
 import React, { useState, useEffect } from "react";
@@ -38,7 +39,7 @@ export default function Home() {
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -47,7 +48,9 @@ export default function Home() {
   return (
     <main className={style.main}>
       <div className="flex justify-between">
-        <Image src={Logo} alt="Logo"></Image>
+        <Link href={"/"}>
+          <Image src={Logo} alt="Logo"></Image>
+        </Link>
         <div className="flex gap-[4.1875rem]">
           <IconWithText
             href="/alterar"

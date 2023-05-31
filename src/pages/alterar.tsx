@@ -1,5 +1,6 @@
 import style from "../styles/alterar.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   Table,
@@ -21,7 +22,9 @@ export default function Alterar() {
   return (
     <main className={style.main}>
       <div className="flex justify-between">
-        <Image src={Logo} alt="Logo"></Image>
+        <Link href={"/"}>
+          <Image src={Logo} alt="Logo"></Image>
+        </Link>
         <div className="flex gap-[4.1875rem]">
           <IconWithText
             href="/alterar"
