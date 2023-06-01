@@ -55,7 +55,7 @@ export function Maps() {
   return (
     <div className={style.container}>
       <div className={style.search}>
-        <span>Qualidade do ar em...</span>
+        <p>Qualidade do ar em...</p>
         <Search onSearch={handleSearch} />
       </div>
 

@@ -121,21 +121,21 @@ export function Board({ name, effect }: BoardProps) {
         <div className={style.tabsTable}>
           <header className={style.header}>
             <div className={style.itemTab}>
-              <span className={name === "Bom" ? style.ItemActive : style.item}>
+              <p className={name === "Bom" ? style.ItemActive : style.item}>
                 Bom
-              </span>
-              <span className={name === "Moderado" ? style.ItemActive : ""}>
+              </p>
+              <p className={name === "Moderado" ? style.ItemActive : ""}>
                 Moderado
-              </span>
-              <span className={name === "Ruim" ? style.ItemActive : ""}>
+              </p>
+              <p className={name === "Ruim" ? style.ItemActive : ""}>
                 Ruim
-              </span>
-              <span className={name === "Muito Ruim" ? style.ItemActive : ""}>
+              </p>
+              <p className={name === "Muito Ruim" ? style.ItemActive : ""}>
                 Muito Ruim
-              </span>
-              <span className={name === "Péssimo" ? style.ItemActive : ""}>
+              </p>
+              <p className={name === "Péssimo" ? style.ItemActive : ""}>
                 Péssimo
-              </span>
+              </p>
             </div>
             <Divider
               orientation="horizontal"
