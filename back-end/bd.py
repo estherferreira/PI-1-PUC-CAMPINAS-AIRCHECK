@@ -60,5 +60,44 @@ def simple():
 
         return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
+
+@app.route("/alterar", methods=["GET", "POST"])
+def alter():
+    if request.method == "GET":
+        data = []
+        for row in cursor.execute("SELECT * FROM Amostras ORDER BY ID ASC"):
+            print(
+                f"ID:{row[0]}  MP10:{row[1]} --- MP25:{row[2]} --- O3:{row[3]} --- CO:{row[4]} --- NO2:{row[5]} --- SO2:{row[6]}")
+
+            data.append({
+                "ID": row[0],
+                "MP10": row[1],
+                "MP25": row[2],
+                "O3": row[3],
+                "CO": row[4],
+                "NO2": row[5],
+                "SO2": row[6]
+            })
+
+        return jsonify(data), 201
+
+    if request.method == "POST":
+        data = request.get_json()
+        id = data['id']
+        mp10 = data['mp10']
+        mp25 = data['mp25']
+        o3 = data['o3']
+        co = data['co']
+        no2 = data['no2']
+        so2 = data['so2']
+
+        comando = f"UPDATE Amostras SET mp10 = '{mp10}', mp25 = '{mp25}', o3 = '{o3}', co = '{co}', no2 = '{no2}', so2 = '{so2}' WHERE ID = {id}"
+
+        cursor.execute(comando)
+        connection.commit()
+
+        return jsonify({'message': 'Amostra atualizada com sucesso'}), 200
+
+
 if __name__ == "__main__":
     app.run(port=3000)
