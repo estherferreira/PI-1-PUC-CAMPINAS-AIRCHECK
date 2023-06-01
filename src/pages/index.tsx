@@ -59,12 +59,6 @@ export default function Home() {
             text="Alterar"
           ></IconWithText>
           <IconWithText
-            href="/"
-            src={Delete}
-            alt="Delete"
-            text="Excluir"
-          ></IconWithText>
-          <IconWithText
             href="/sair"
             src={Logout}
             alt="Logout"
