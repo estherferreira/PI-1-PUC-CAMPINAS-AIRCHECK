@@ -8,3 +8,13 @@
     color: white;
     font-weight: 500;
 }
+
+.black {
+    color: black;
+    font-weight: 500;
+}
+
+.blackIcon {
+    filter: invert(1)
+}
+    
