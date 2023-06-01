@@ -6,8 +6,8 @@ import React, { useState, useEffect } from "react";
 
 import Logo from "../../public/Logo.svg";
 import Pen from "../../public/pen.svg";
-import Delete from "../../public/delete.svg";
 import Logout from "../../public/logout.svg";
+import Head from "next/head";
 
 import { IconWithText } from "@/components/IconWithText";
 import { IncludeOption } from "@/components/IncludeOption";
@@ -47,6 +47,9 @@ export default function Home() {
 
   return (
     <main className={style.main}>
+      <Head>
+        <title>Painel | Aircheck</title>
+      </Head>
       <div className="flex justify-between">
         <Link href={"/"}>
           <Image src={Logo} alt="Logo"></Image>

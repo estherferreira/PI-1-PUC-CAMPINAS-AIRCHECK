@@ -6,16 +6,24 @@ import { IconWithText } from "@/components/IconWithText";
 import { EditableTable } from "@/components/EditableTable/editableTable";
 
 import Pen from "../../public/pen.svg";
-import Delete from "../../public/delete.svg";
 import Logout from "../../public/logout.svg";
+import Head from "next/head";
 
 export default function Alterar() {
-  const backgroundColor = '#fafafa';
+  const backgroundColor = "#fafafa";
   return (
     <main className={style.main}>
+      <Head>
+        <title>Alterar | Aircheck</title>
+      </Head>
       <div className="flex justify-between">
         <Link href={"/"}>
-          <Image src="/black-logo.png" alt="Logo" width={169.895} height={28.0696}></Image>
+          <Image
+            src="/black-logo.png"
+            alt="Logo"
+            width={169.895}
+            height={28.0696}
+          ></Image>
         </Link>
         <div className="flex gap-[4.1875rem]">
           <IconWithText
