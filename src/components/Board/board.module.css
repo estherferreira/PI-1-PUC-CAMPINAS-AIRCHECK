@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     gap: 7rem;
-    width: 75%;
+    width: 54.9rem;
   }
 
   .rightSide {
@@ -26,7 +26,6 @@
 
     padding: 3rem 0;
     align-items: center;
-    width: 100%;
 
     align-items: center;
     justify-content: space-around;
@@ -110,4 +109,11 @@
 
 /* Extra large devices (large desktops, 1400px and up)*/
 @media (min-width: 1500px) {
+  .leftSide {
+    width: 75%;
+  }
+
+  .rightSide {
+    width: 100%;
+  }
 }
