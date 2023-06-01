@@ -42,7 +42,10 @@ export default function Alterar() {
           ></IconWithText>
         </div>
       </div>
-      <EditableTable></EditableTable>
+      <div className={style.page}>
+        <EditableTable></EditableTable>
+        <small className="text-[#000]">&copy; 2023 Aircheck</small>
+      </div>
     </main>
   );
 }
