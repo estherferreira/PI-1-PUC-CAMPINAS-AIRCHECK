@@ -61,9 +61,10 @@ def simple():
         return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
 
-@app.route("/alterar", methods=["GET", "POST"])
+@app.route("/alterar", methods=["GET", "POST", "DELETE"])
 def alter():
     if request.method == "GET":
+        # Puxa os valores do banco de dados e coloca eles na tabela
         data = []
         for row in cursor.execute("SELECT * FROM Amostras ORDER BY ID ASC"):
             print(
@@ -81,6 +82,7 @@ def alter():
 
         return jsonify(data), 201
 
+    # Atualiza os dados
     if request.method == "POST":
         data = request.get_json()
         id = data['id']
@@ -97,6 +99,18 @@ def alter():
         connection.commit()
 
         return jsonify({'message': 'Amostra atualizada com sucesso'}), 200
+
+@app.route("/alterar/<int:id>", methods=["DELETE"])
+def delete_data(id):
+    try:
+        # Execute o comando SQL para excluir o item com o ID fornecido
+        comando = f"DELETE FROM Amostras WHERE ID = {id}"
+        cursor.execute(comando)
+        connection.commit()
+
+        return jsonify({'message': 'Amostra excluída com sucesso'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == "__main__":

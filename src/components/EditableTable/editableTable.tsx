@@ -95,11 +95,27 @@ export function EditableTable() {
 
   const isEditing = (record: Item) => record.ID === editingKey;
 
-  
+  const handleDelete = async (ID: React.Key) => {
+    try {
+      // Enviar solicitação DELETE para remover o item do servidor
+      const response = await fetch(`${url}/alterar/${ID}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  const handleDelete = (ID: React.Key) => {
-    const newData = data.filter((item) => item.ID !== ID);
-    setData(newData);
+      if (response.ok) {
+        // Remover o item da lista de dados
+        const newData = data.filter((item) => item.ID !== ID);
+        setData(newData);
+        console.log("Item excluído com sucesso");
+      } else {
+        console.error("Erro ao excluir o item");
+      }
+    } catch (error) {
+      console.log("Erro:", error);
+    }
   };
 
   const save = async (ID: React.Key) => {
