@@ -23,30 +23,22 @@ export function Maps() {
   const url = "http://127.0.0.1:3000";
 
   const [center, setCenter] = useState(defaultCenter);
+
+  //Aquisição, filtro e envio para o banco de dados
+
   //Dados da API do ar
   const [data, setData] = useState(null);
 
-  //Dados filtrados da API
-  const [values, setValues] = useState({
-    mp10: "",
-    mp25: "",
-    o3: "",
-    co: "",
-    no2: "",
-    so2: "",
-  });
-
   const selectValuesFromData = (responseData: any) => {
     const selectedValues = {
-      mp10: responseData?.list[0]?.components?.pm10 ?? "",
-      mp25: responseData?.list[0]?.components?.pm2_5 ?? "",
-      o3: responseData?.list[0]?.components?.o3 ?? "",
-      co: responseData?.list[0]?.components?.co ?? "",
-      no2: responseData?.list[0]?.components?.no2 ?? "",
-      so2: responseData?.list[0]?.components?.so2 ?? "",
+      mp10: parseInt(responseData?.list[0]?.components?.pm10) || 0,
+      mp25: parseInt(responseData?.list[0]?.components?.pm2_5) || 0,
+      o3: parseInt(responseData?.list[0]?.components?.o3) || 0,
+      co: parseInt(responseData?.list[0]?.components?.co) || 0,
+      no2: parseInt(responseData?.list[0]?.components?.no2) || 0,
+      so2: parseInt(responseData?.list[0]?.components?.so2) || 0,
     };
 
-    console.log(selectedValues);
     return selectedValues;
   };
 
@@ -64,11 +56,27 @@ export function Maps() {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
+        //console.log(responseData);
         setData(responseData);
 
         const selectedValues = selectValuesFromData(responseData);
-        setValues(selectedValues);
+        //setValues(selectedValues);
+        console.log(selectedValues);
+
+        const classificationResponse = await fetch(`${url}/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(selectedValues),
+        });
+
+        if (classificationResponse.ok) {
+          const classificationData = await classificationResponse.json();
+          //console.log(classificationData);
+          const classification = classificationData.classification;
+          //console.log("Classification:", classification);
+        }
+      } else {
+        console.error("Campos inválidos em `selectedValues`");
       }
     } catch (error) {
       console.error("Erro ao obter os dados da qualidade do ar:", error);
