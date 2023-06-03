@@ -1,61 +1,122 @@
-# Função para determinar o índice de qualidade do ar com base no valor e nos limites fornecidos.
-def indice_qualidade_ar(valor, limites):
-    # Percorre os limites para encontrar o índice correspondente ao valor.
-    for i, (minimo, maximo) in enumerate(limites):
-        if minimo <= valor <= maximo:
-            return i + 1
-    # Retorna -1 caso o valor não corresponda a nenhum índice.
-    return -1
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from calc import *
+from encrypt import *
+from decrypt import *
+import oracledb
 
-# Função para imprimir os efeitos na saúde relacionados à classificação de qualidade do ar.
-def imprime_efeitos_saude(classificacao):
-    # Dicionário de efeitos na saúde relacionados à classificação.
-    efeitos = {
-        # ... (efeitos na saúde existentes)
-        1: "A qualidade do ar é considerada satisfatória e a poluição do ar apresenta pouco ou nenhum risco.",
-        2: "Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar sintomas como tosse seca e cansaço. A população, em geral, não é afetada.",
-        3: "Toda a população pode apresentar sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta. Pessoas de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas) podem apresentar efeitos mais sérios na saúde.",
-        4: "Toda a população pode apresentar agravamento dos sintomas como tosse seca, cansaço, ardor nos olhos, nariz e garganta e ainda falta de ar e respiração ofegante. Efeitos ainda mais graves à saúde de grupos sensíveis (crianças, idosos e pessoas com doenças respiratórias e cardíacas).",
-        5: "Toda a população pode apresentar sérios riscos de manifestações de doenças respiratórias e cardiovasculares. Aumento de mortes prematuras em pessoas de grupos sensíveis."
-    }
+# Cria uma instância da classe Flask para a aplicação.
+app = Flask(__name__)
 
-    # Imprime o efeito na saúde relacionado à classificação fornecida.
-    print(efeitos[classificacao])
-    return efeitos[classificacao]
+# Aplica o CORS à aplicação, permitindo solicitações de origens diferentes
+CORS(app)
 
-# Função principal.
-def mainClass(mp10, mp25, o3, co, no2, so2):
-    # Limites para os índices de qualidade do ar para cada poluente.
-    limites_MP10 = [(0, 50), (50, 100), (100, 150), (150, 250), (250, float('inf'))]
-    limites_MP25 = [(0, 25), (25, 50), (50, 75), (75, 125), (125, float('inf'))]
-    limites_O3 = [(0, 100), (100, 130), (130, 160), (160, 200), (200, float('inf'))]
-    limites_CO = [(0, 9), (9, 11), (11, 13), (13, 15), (15, float('inf'))]
-    limites_NO2 = [(0, 200), (200, 240), (240, 320), (320, 1130), (1130, float('inf'))]
-    limites_SO2 = [(0, 20), (20, 40), (40, 365), (365, 800), (800, float('inf'))]
+connection = oracledb.connect(
+    user="system",
+    password="senha",
+    dsn="localhost:1521/xe")
 
-    # Calcula o índice de qualidade do ar para cada poluente.
-    indices = [
-        indice_qualidade_ar(mp10, limites_MP10),
-        indice_qualidade_ar(mp25, limites_MP25),
-        indice_qualidade_ar(o3, limites_O3),
-        indice_qualidade_ar(co, limites_CO),
-        indice_qualidade_ar(no2, limites_NO2),
-        indice_qualidade_ar(so2, limites_SO2),
-    ]
+print("Successfully connected to Oracle Database")
 
-    # Determina a classificação geral de qualidade do ar com base nos índices calculados.
-    qualidade_ar = max(indices)
-    qualificacoes = ["Bom", "Moderado", "Ruim", "Muito Ruim", "Péssimo"]
+# Cursor usado para executar comandos SQL no banco de dados
+cursor = connection.cursor()
 
-    # Imprime a classificação geral de qualidade do ar.
-    print(f"A qualidade do ar é classificada como: {qualificacoes[qualidade_ar - 1]}")
-    qualificacao = str(qualificacoes[qualidade_ar - 1])
+# Define uma rota para a raiz do aplicativo ("/") que pode lidar com solicitações GET e POST
 
-    # Imprime os efeitos na saúde relacionados à classificação de qualidade do ar.
-    efeitos_saude = imprime_efeitos_saude(qualidade_ar)
 
-    # Retorna a qualificação e os efeitos na saúde.
-    return qualificacao, efeitos_saude
+@app.route("/", methods=["GET", "POST"])
+def simple():
+    if request.method == "GET":
+        cursor.execute(
+            "SELECT AVG(MP10), AVG(MP25), AVG(O3), AVG(CO), AVG(NO2), AVG(SO2) FROM Amostras")
 
-# Chama a função principal.
-""" mainClass() """
+        # Retorna a primeira linha de resultado da consulta como uma tupla
+        retorno = cursor.fetchone()
+
+        print(f'Media de MP10: {retorno[0]:.2f}')
+        print(f'Media de MP25: {retorno[1]:.2f}')
+        print(f'Media de O3: {retorno[2]:.2f}')
+        print(f'Media de CO: {retorno[3]:.2f}')
+        print(f'Media de NO2: {retorno[4]:.2f}')
+        print(f'Media de SO2: {retorno[5]:.2f}')
+
+        # "Resultado" recebe retorno da função mainClass
+        qualificacao, efeitos_saude = mainClass(retorno[0], retorno[1], retorno[2],
+                                                retorno[3], retorno[4], retorno[5])
+
+        return {'classification': [f'{qualificacao}', f'{efeitos_saude}']}
+
+    if request.method == "POST":
+        data = request.get_json()
+        mp10 = data['mp10']
+        mp25 = data['mp25']
+        o3 = data['o3']
+        co = data['co']
+        no2 = data['no2']
+        so2 = data['so2']
+        qualificacao, efeitos_saude = mainClass(mp10,mp25,o3,co,no2,so2)
+        qualificacao = main_encrypt(qualificacao)
+        res = main_decrypt(qualificacao)
+        print(f'Criptografado: {qualificacao} Descriptografado: {res}')
+
+        comando = f"INSERT INTO Amostras (mp10, mp25, o3, co, no2, so2, classificacao) VALUES ('{mp10}', '{mp25}', '{o3}', '{co}', '{no2}', '{so2}','{qualificacao}')"
+        cursor.execute(comando)
+        connection.commit()
+
+        return jsonify({'message': 'Amostra inserida com sucesso'}), 201
+
+
+@app.route("/alterar", methods=["GET", "POST", "DELETE"])
+def alter():
+    if request.method == "GET":
+        # Puxa os valores do banco de dados e coloca eles na tabela
+        data = []
+        for row in cursor.execute("SELECT * FROM Amostras ORDER BY ID ASC"):
+            print(
+                f"ID:{row[0]}  MP10:{row[1]} --- MP25:{row[2]} --- O3:{row[3]} --- CO:{row[4]} --- NO2:{row[5]} --- SO2:{row[6]}")
+
+            data.append({
+                "ID": row[0],
+                "MP10": row[1],
+                "MP25": row[2],
+                "O3": row[3],
+                "CO": row[4],
+                "NO2": row[5],
+                "SO2": row[6]
+            })
+
+        return jsonify(data), 201
+
+    # Atualiza os dados
+    if request.method == "POST":
+        data = request.get_json()
+        id = data['id']
+        mp10 = data['mp10']
+        mp25 = data['mp25']
+        o3 = data['o3']
+        co = data['co']
+        no2 = data['no2']
+        so2 = data['so2']
+
+        comando = f"UPDATE Amostras SET mp10 = '{mp10}', mp25 = '{mp25}', o3 = '{o3}', co = '{co}', no2 = '{no2}', so2 = '{so2}' WHERE ID = {id}"
+
+        cursor.execute(comando)
+        connection.commit()
+
+        return jsonify({'message': 'Amostra atualizada com sucesso'}), 200
+
+@app.route("/alterar/<int:id>", methods=["DELETE"])
+def delete_data(id):
+    try:
+        # Execute o comando SQL para excluir o item com o ID fornecido
+        comando = f"DELETE FROM Amostras WHERE ID = {id}"
+        cursor.execute(comando)
+        connection.commit()
+
+        return jsonify({'message': 'Amostra excluída com sucesso'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+if __name__ == "__main__":
+    app.run(port=3000,debug=True)
