@@ -13,14 +13,14 @@
     gap: 4rem;
   }
 
-  .leftSide {
+  .rightSide {
     display: flex;
     flex-direction: column;
     gap: 7rem;
     width: 54.9rem;
   }
 
-  .rightSide {
+  .leftSide {
     display: flex;
     flex-direction: column;
 
@@ -109,11 +109,11 @@
 
 /* Extra large devices (large desktops, 1400px and up)*/
 @media (min-width: 1500px) {
-  .leftSide {
+  .rightSide {
     width: 75%;
   }
 
-  .rightSide {
+  .leftSide {
     width: 100%;
   }
 }
