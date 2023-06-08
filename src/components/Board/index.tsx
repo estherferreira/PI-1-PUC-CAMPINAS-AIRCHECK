@@ -118,10 +118,10 @@ export function Board({ name, effect }: BoardProps) {
   return (
     <div className={style.content}>
       <div className={style.leftSide}>
-        <TitleAndDescription title="O ar está..." text=""></TitleAndDescription>
+        {/* <TitleAndDescription title="O ar está..." text=""></TitleAndDescription> */}
         <div
           ref={chartRef}
-          className="w-[400px] h-[400px] scale-90 mt-[-200px] mb-[-70px]"
+          className="w-[400px] h-[400px] scale-90 mt-[-110px] mb-[-70px]"
         ></div>
       </div>
       <div className={style.rightSide}>
@@ -154,7 +154,7 @@ export function Board({ name, effect }: BoardProps) {
             <p className={style.effects}>{effect}</p>
           </div>
         </div>
-        <Maps></Maps>
+        {/* <Maps></Maps> */}
       </div>
     </div>
   );
