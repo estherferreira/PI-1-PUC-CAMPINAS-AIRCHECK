@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from app import *
+from decrypt import *
+from encrypt import *
 import oracledb
 
 # Cria uma instância da classe Flask para a aplicação.
@@ -61,7 +63,7 @@ def simple():
         return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
 
-@app.route("/alterar", methods=["GET", "POST", "DELETE"])
+@app.route("/alterar", methods=["GET", "POST"])
 def alter():
     if request.method == "GET":
         # Puxa os valores do banco de dados e coloca eles na tabela
