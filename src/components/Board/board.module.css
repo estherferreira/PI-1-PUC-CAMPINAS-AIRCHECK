@@ -13,7 +13,7 @@
     gap: 4rem;
   }
 
-  .rightSide {
+  /* .rightSide {
     display: flex;
     flex-direction: column;
     gap: 7rem;
@@ -32,6 +32,27 @@
 
     background-color: #ffffff05;
     border-radius: 0.434375rem;
+  } */
+
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+
+    padding: 3rem 0;
+    align-items: center;
+
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: #ffffff05;
+    border-radius: 0.434375rem;
+  }
+
+  .rightSide {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    width: 54.9rem;
   }
 
   .search {
@@ -74,7 +95,7 @@
   .halfDonutChart {
     display: flex;
     flex-direction: column;
-  
+
     align-items: center;
   }
 
@@ -109,11 +130,19 @@
 
 /* Extra large devices (large desktops, 1400px and up)*/
 @media (min-width: 1500px) {
-  .rightSide {
+  /* .rightSide {
     width: 75%;
   }
 
   .leftSide {
     width: 100%;
+  } */
+ 
+  .leftSide {
+    width: 60%;
+  }
+
+  .rightSide {
+    width: 75%;
   }
 }

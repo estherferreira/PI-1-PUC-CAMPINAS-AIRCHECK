@@ -1,8 +1,14 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+<<<<<<< HEAD
 from calc import *
 from encrypt import *
 from decrypt import *
+=======
+from app import *
+from decrypt import *
+from encrypt import *
+>>>>>>> e43b944232813d5992599c992dee45b152a52b68
 import oracledb
 
 # Cria uma instância da classe Flask para a aplicação.
@@ -13,7 +19,11 @@ CORS(app)
 
 connection = oracledb.connect(
     user="system",
+<<<<<<< HEAD
     password="senha",
+=======
+    password="ef",
+>>>>>>> e43b944232813d5992599c992dee45b152a52b68
     dsn="localhost:1521/xe")
 
 print("Successfully connected to Oracle Database")
@@ -54,19 +64,29 @@ def simple():
         co = data['co']
         no2 = data['no2']
         so2 = data['so2']
+<<<<<<< HEAD
         qualificacao, efeitos_saude = mainClass(mp10,mp25,o3,co,no2,so2)
         qualificacao = main_encrypt(qualificacao)
         res = main_decrypt(qualificacao)
         print(f'Criptografado: {qualificacao} Descriptografado: {res}')
 
         comando = f"INSERT INTO Amostras (mp10, mp25, o3, co, no2, so2, classificacao) VALUES ('{mp10}', '{mp25}', '{o3}', '{co}', '{no2}', '{so2}','{qualificacao}')"
+=======
+
+        comando = f"INSERT INTO Amostras (mp10, mp25, o3, co, no2, so2) VALUES ('{mp10}', '{mp25}', '{o3}', '{co}', '{no2}', '{so2}')"
+
+>>>>>>> e43b944232813d5992599c992dee45b152a52b68
         cursor.execute(comando)
         connection.commit()
 
         return jsonify({'message': 'Amostra inserida com sucesso'}), 201
 
 
+<<<<<<< HEAD
 @app.route("/alterar", methods=["GET", "POST", "DELETE"])
+=======
+@app.route("/alterar", methods=["GET", "POST"])
+>>>>>>> e43b944232813d5992599c992dee45b152a52b68
 def alter():
     if request.method == "GET":
         # Puxa os valores do banco de dados e coloca eles na tabela
@@ -119,4 +139,8 @@ def delete_data(id):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run(port=3000,debug=True)
+=======
+    app.run(port=3000)
+>>>>>>> e43b944232813d5992599c992dee45b152a52b68

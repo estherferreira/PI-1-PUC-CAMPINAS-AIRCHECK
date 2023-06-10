@@ -8,13 +8,24 @@
 
 /* Extra large devices (large desktops, 1400px and up)*/
 @media (min-width: 1400px) {
-    .main {
+    /* .main {
         display: flex;
         flex-direction: column;
 
         background-color: #002062;
 
         height: 137vh;
+        padding: 4rem;
+        gap: 4rem;
+    } */
+
+    .main {
+        display: flex;
+        flex-direction: column;
+
+        background-color: #002062;
+
+        height: 110.4vh;
         padding: 4rem;
         gap: 4rem;
     }
@@ -24,6 +35,6 @@
 @media (min-width: 1500px) {
     .main {
         padding: 4.8125rem 6rem;
-        height: 142vh;
+        height: 113.4vh;
     }
 }
