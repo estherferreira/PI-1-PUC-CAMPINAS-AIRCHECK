@@ -11,6 +11,7 @@ app = Flask(__name__)
 # Aplica o CORS à aplicação, permitindo solicitações de origens diferentes
 CORS(app)
 
+# Estabelece a conexão com o banco de dados Oracle
 connection = oracledb.connect(user="system", password="ef", dsn="localhost:1521/xe")
 
 print("Successfully connected to Oracle Database")
@@ -19,8 +20,6 @@ print("Successfully connected to Oracle Database")
 cursor = connection.cursor()
 
 # Define uma rota para a raiz do aplicativo ("/") que pode lidar com solicitações GET e POST
-
-
 @app.route("/", methods=["GET", "POST"])
 def simple():
     if request.method == "GET":
